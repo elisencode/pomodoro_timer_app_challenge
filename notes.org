@@ -1,0 +1,128 @@
+# -**- mode: org -**-
+# -**- coding: utf-8 -**-
+#+SETUPFILE: ./template_headers.org
+#+STARTUP: overview
+#+TITLE: NOTES - TITLE
+#+SUBTITLE: By [WHO]
+#+AUTHOR: [ME]
+#+DATE: Starts [2023-03-14 Tue] - Ends [C-x C-!]
+#+LANGUAGE: en
+# #+PROPERTY: header-args :eval never-export
+# #### :session  :exports both
+
+#+TAGS: [ computational_thinking : math(m) ai ml data cybersecurity linux clean_code ]
+#+TAGS: [ programming_language : c c++ python3 JavaScript bash common_lisp ]
+#+TAGS: BUG(b)
+
+#+SEQ_TODO: TODO(t) LEARNING(l!) WAIT(w@/!) | Done(d!) CANCELED(c@)
+
+* How to build pomodoro timer application Javascript?
+
+[[https://platform.openai.com/overview][OpenAI API Chat Beta]]
+
+A basic overview of the steps involved:
+
+1. Start by planning your application's user interface (UI). This should
+  include a timer display, buttons to start and stop the timer, and any other
+  settings you want to include (such as session length, break length, etc.).
+2. Set up your HTML file with the necessary elements, such as the timer display
+   and the buttons.
+3. Write the JavaScript code to handle the timer functionality. This will
+   involve using the `setInterval()` method to update the timer display at
+   regular intervals, and handling user input to start and stop the timer.
+4. Add any additional features you want, such as settings to adjust the session
+   and break lengths, sound notifications when the timer ends, etc.
+
+
+#+begin_src js :exports both :results output
+var util = require("util");
+
+console.log("this is a Node.js test program!");
+#+end_src
+
+#+RESULTS:
+: this is a Node.js test program!
+
+#+begin_src js :exports both :results output
+console.log("Hello world!");
+#+end_src
+
+#+RESULTS:
+: Hello world!
+
+** Sample code to get you started
+
+In this example, the user can input the desired session and break lengths, and
+click the "Start" button to begin the timer. The timer is updated every second
+using the `setInterval()` method, and when the session is over, a sound is
+played and the break timer begins. After the break timer ends, the session timer
+starts again. The "Stop" button stops the timer and resets the display.
+
+- Comment above codes
+  - Sure, I'd be happy to comment the code to explain what each section is doing:
+
+#+begin_src html
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pomodoro Timer</title>
+	<script>
+		let timeLeft = 0; // initialize timeLeft to zero
+		let isRunning = false; // initialize isRunning to false
+
+		function startTimer() {
+			if (!isRunning) { // check if the timer is already running
+				isRunning = true; // set isRunning to true
+				const duration = document.getElementById("duration").value; // get the session length from the user input
+				timeLeft = duration * 60; // convert session length to seconds and set as timeLeft
+				document.getElementById("status").innerHTML = "Session in progress"; // update status display
+				const countdown = setInterval(function() { // start the countdown using setInterval
+					const minutes = Math.floor(timeLeft / 60); // calculate minutes remaining
+					const seconds = timeLeft % 60; // calculate seconds remaining
+					document.getElementById("timer").innerHTML = minutes + ":" + (seconds < 10 ? "0" : "") + seconds; // update timer display with minutes and seconds
+					timeLeft--; // decrement timeLeft
+					if (timeLeft < 0) { // check if the session is over
+						clearInterval(countdown); // stop the countdown
+						document.getElementById("status").innerHTML = "Break in progress"; // update status display
+						timeLeft = document.getElementById("break").value * 60; // get break length from user input and set as timeLeft
+						const audio = new Audio("alert.wav"); // create new Audio object
+						audio.play(); // play sound alert
+						setTimeout(startTimer, 5000); // start the session timer again after a 5-second break
+					}
+				}, 1000); // update timer display every second
+			}
+		}
+
+		function stopTimer() {
+			isRunning = false; // set isRunning to false
+			timeLeft = 0; // set timeLeft to zero
+			document.getElementById("timer").innerHTML = "00:00"; // reset timer display
+			document.getElementById("status").innerHTML = ""; // reset status display
+		}
+	</script>
+</head>
+<body>
+	<h1>Pomodoro Timer</h1>
+	<label>Session length (minutes):</label>
+	<input type="number" id="duration" value="25"><br> // input for session length
+	<label>Break length (minutes):</label>
+	<input type="number" id="break" value="5"><br> // input for break length
+	<button onclick="startTimer()">Start</button> // button to start the timer
+	<button onclick="stopTimer()">Stop</button> // button to stop the timer
+	<p id="status"></p> // display for status message (e.g. "Session in progress")
+	<div id="timer">00:00</div> // display for timer (formatted as "minutes:seconds")
+</body>
+</html>
+
+#+end_src
+
+
+- Comment for code line, capitalize first letter or not?
+  - When writing comments in code, it is generally recommended to use *sentence
+    case* (i.e., capitalize the first letter of the first word in the sentence,
+    and leave the rest in lowercase). This is because sentence case is easier to
+    read and is consistent with the style of most programming languages.
+  - However, if you are working on a project with an established style guide
+    that specifies a different convention for comments, you should follow that
+    guide instead. It's always a good idea to maintain consistency in your
+    codebase, especially when working on a team.
