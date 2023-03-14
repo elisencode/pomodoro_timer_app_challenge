@@ -31,7 +31,7 @@ A basic overview of the steps involved:
    involve using the `setInterval()` method to update the timer display at
    regular intervals, and handling user input to start and stop the timer.
 4. Add any additional features you want, such as settings to adjust the session
-   and break lengths, sound notifications when the timer ends, etc.
+   and break lengths, sound notifications when the timer ends, etc.
 
 
 #+begin_src js :exports both :results output
@@ -126,3 +126,122 @@ starts again. The "Stop" button stops the timer and resets the display.
     that specifies a different convention for comments, you should follow that
     guide instead. It's always a good idea to maintain consistency in your
     codebase, especially when working on a team.
+* How do I practice programming with ChatGPT?
+
+As an AI language model, ChatGPT can help you practice programming in a few
+ways:
+1. Ask programming-related questions: You can ask ChatGPT programming-related
+   questions to get explanations, examples, and advice on different programming
+   concepts and languages.
+2. Practice coding problems: You can ask ChatGPT to provide you with coding
+   problems and challenges to help you practice your programming skills. For
+   example, you could ask for a coding challenge that involves solving a
+   specific problem or implementing a particular algorithm.
+3. Get code reviews: You can ask ChatGPT to review your code and provide
+   feedback on how to improve it. This can be a great way to learn best
+   practices and get advice from experienced programmers.
+4. Explore programming resources: You can ask ChatGPT for recommendations on
+   programming resources, such as books, tutorials, and online courses. ChatGPT
+   can also provide you with links to programming resources that can help you
+   learn new skills and improve your programming knowledge.
+
+Remember, while ChatGPT can be a helpful resource for practicing programming,
+it's important to also practice writing code on your own and building projects
+to gain hands-on experience.
+
+** An example of a C code snippet with comments:
+
+#+begin_src C :results output :exports both
+// This program calculates the sum of two numbers
+#include <stdio.h>
+
+int main() {
+    int num1, num2, sum;  // declare variables for the numbers and the sum
+
+    printf("Enter the first number: ");  // prompt user for input
+    scanf("%d", &num1);  // read in first number
+
+    printf("Enter the second number: ");  // prompt user for input
+    scanf("%d", &num2);  // read in second number
+
+    sum = num1 + num2;  // calculate the sum
+
+    printf("The sum of %d and %d is %d.\n", num1, num2, sum);  // print the sum
+
+    return 0;  // exit program
+}
+
+#+end_src
+
+In this example, comments are used to describe the purpose of the program,
+explain the meaning of variables, prompt the user for input, and provide a
+description of what is being printed to the console. The comments make the code
+more readable and easier to understand, especially for someone who is not
+familiar with the program's purpose or the C programming language.
+
+** An example of a basic Makefile that compiles a C program:
+
+*WARNING!* Only entering *TAB characters*, not mixtures of +TAB and spaces+.
+
+#+begin_src Makefile :results output :exports both
+CC = gcc
+CFLAGS = -Wall
+
+all: program
+
+program: main.c helper.c
+    $(CC) $(CFLAGS) -o program main.c helper.c
+
+clean:
+    rm -f program
+
+#+end_src
+
+This is a simple Makefile that compiles a C program.
+
+- The `cc` variable specifies the C compiler to be used, which in this case is
+  `gcc`.
+- The `CFLAGS` variable specifies any additional flags to be passed to the
+  compiler, which in this case is `-Wall` to enable all warnings.
+- The `all` target depends on the `program` target.
+- The `program` target specifies that the `main.c` and `helper.c` files are
+  dependencies.
+- The `$(CC) $(CFLAGS) -o program main.c helper.c` line is the command that
+  compiles the two source files and links them into an executable program called
+  `program`.
+- The `clean` target includes a command to remove the `program` binary, which
+  can be used to clean up the working directory.
+
+Overall, this Makefile automates the build process for a simple C program and
+makes it easy to compile and clean the project.
+
+** Comments in code, capitalize the first letter or not?
+
+When writing comments in code, it is generally recommended to use *sentence case*
+(i.e., *capitalize the first letter of the first word* in the sentence, and leave
+the rest in lowercase).
+
+Why? Because sentence case is easier to read and is consistent with the style of
+most programming languages.
+
+** Empty line at the end of a code file or not?
+
+Best practice coding conventions:
+
+Adding an *empty line* at the *end of a code file* ensures that there is always a
+newline character at the end, which can avoid +potential issues+ with certain
+tools and workflows.
+
+** Makefile or makefile?
+
+By convention, `Makefile` (with a *capital "M"*) is more commonly used and
+recognized by default by the `make` command.
+
+If you have a Makefile with a different name, you can specify it explicitly when
+running the `make` command using the `-f` or `--file` option, like this:
+
+#+begin_src Makefile
+make -f MyMakefile
+#+end_src
+
+This tells `make` to use the `MyMakefile` file instead of the default `Makefile`.
